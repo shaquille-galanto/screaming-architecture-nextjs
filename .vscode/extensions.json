@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "pkief.material-icon-theme",
+    "bierner.emojisense",
+    "formulahendry.auto-rename-tag",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
