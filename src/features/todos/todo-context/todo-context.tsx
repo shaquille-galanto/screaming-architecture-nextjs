@@ -1,3 +1,5 @@
+'use client'
+
 import { Context, createContext, useContext, useReducer } from 'react'
 import { todoReducer } from './todo-reducer'
 import type { TodoContextDispatch, TodoContextState, TodoProviderProps } from './types'
