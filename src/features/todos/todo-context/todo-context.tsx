@@ -1,6 +1,6 @@
 import { Context, createContext, useContext, useReducer } from 'react'
 import { todoReducer } from './todo-reducer'
-import { TodoContextDispatch, TodoContextState, TodoProviderProps } from './types'
+import type { TodoContextDispatch, TodoContextState, TodoProviderProps } from './types'
 
 const TodoStateContext = createContext<TodoContextState | null>(null) as Context<TodoContextState>
 const TodoDispatchContext = createContext<TodoContextDispatch | null>(

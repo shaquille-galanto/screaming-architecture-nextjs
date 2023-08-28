@@ -1,4 +1,4 @@
-import { TodoContextState, TodoReducerAction } from './types'
+import type { TodoContextState, TodoReducerAction } from './types'
 
 export const todoReducer = (state: TodoContextState, action: TodoReducerAction) => {
   const { type, payload } = action
