@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Input } from '@features/ui'
-import { Field, Form, Formik } from 'formik'
+import { Field, Form, Formik, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import { useTodoDispatch } from '../todo-context'
 import styles from './styles.module.scss'
@@ -18,8 +18,12 @@ const validationSchema = yup.object().shape({
 export const AddTodoForm = ({ ...props }: AddTodoFormProps) => {
   const { handleAdd } = useTodoDispatch()
 
-  const handleSubmit = ({ text }: typeof formInitialValues) => {
+  const handleSubmit = (
+    { text }: typeof formInitialValues,
+    { resetForm }: FormikHelpers<typeof formInitialValues>,
+  ) => {
     handleAdd(text)
+    resetForm()
   }
 
   return (
