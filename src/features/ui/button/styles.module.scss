@@ -1,0 +1,17 @@
+.button {
+  height: 40px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.primary {
+    background-color: black;
+    color: white;
+  }
+
+  &.secondary {
+    background-color: lightgray;
+    color: black;
+  }
+}
