@@ -1,6 +1,4 @@
 .button {
-  height: 40px;
-  padding: 0 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,5 +11,16 @@
   &.secondary {
     background-color: lightgray;
     color: black;
+  }
+
+  &.md {
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  &.sm {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 14px;
   }
 }
