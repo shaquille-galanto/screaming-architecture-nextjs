@@ -1,13 +1,15 @@
 .item {
+  &:not(:first-child) {
+    border-top: 1px solid lightgray;
+  }
+}
+
+.form {
   padding: 24px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   column-gap: 8px;
-
-  &:not(:first-child) {
-    border-top: 1px solid lightgray;
-  }
 }
 
 .buttonWrapper,
@@ -15,4 +17,20 @@
   display: flex;
   align-items: center;
   column-gap: 8px;
+}
+
+.editInput {
+  transition: 0.2s ease-out;
+
+  &.readOnly {
+    border-color: transparent;
+    padding: 0;
+  }
+}
+
+.errorMessage {
+  margin-top: 4px;
+  position: absolute;
+  font-size: 12px;
+  color: red;
 }

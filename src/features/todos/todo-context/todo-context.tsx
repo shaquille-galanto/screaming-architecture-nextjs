@@ -1,6 +1,7 @@
 'use client'
 
 import { Context, createContext, useContext, useReducer } from 'react'
+import { Todo } from '../types'
 import { todoReducer } from './todo-reducer'
 import type { TodoContextDispatch, TodoContextState, TodoProviderProps } from './types'
 
@@ -35,9 +36,18 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     })
   }
 
+  const handleEdit = (todo: Todo) => {
+    dispatch({
+      type: 'EDIT',
+      payload: {
+        todo,
+      },
+    })
+  }
+
   return (
     <TodoStateContext.Provider value={state}>
-      <TodoDispatchContext.Provider value={{ handleAdd, handleDelete, dispatch }}>
+      <TodoDispatchContext.Provider value={{ handleAdd, handleDelete, handleEdit, dispatch }}>
         {children}
       </TodoDispatchContext.Provider>
     </TodoStateContext.Provider>
