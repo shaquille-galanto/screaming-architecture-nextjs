@@ -24,4 +24,11 @@
     padding: 0 12px;
     font-size: 12px;
   }
+
+  &:disabled {
+    background-color: lightgray;
+    color: black;
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 }
