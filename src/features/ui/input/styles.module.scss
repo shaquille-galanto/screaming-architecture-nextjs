@@ -1,10 +1,18 @@
 .input {
-  height: 40px;
   width: 100%;
-  padding: 0 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid lightgray;
   border-radius: 4px;
+
+  &.md {
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  &.sm {
+    height: 28px;
+    padding: 0 8px;
+  }
 }
