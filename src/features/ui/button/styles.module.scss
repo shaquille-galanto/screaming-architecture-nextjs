@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
 
   &.primary {
     background-color: black;
@@ -19,8 +20,8 @@
   }
 
   &.sm {
-    height: 32px;
+    height: 28px;
     padding: 0 12px;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
