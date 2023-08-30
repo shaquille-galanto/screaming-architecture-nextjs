@@ -3,10 +3,12 @@ import type { TodoContextState, TodoReducerAction } from './types'
 export const todoReducer = (state: TodoContextState, action: TodoReducerAction) => {
   const { type, payload } = action
   const { todos } = state
-  const { id, text } = payload
+  const { id } = payload
 
   switch (type) {
-    case 'ADD':
+    case 'ADD': {
+      const { text } = payload
+
       return {
         ...state,
         todos: [
@@ -18,6 +20,18 @@ export const todoReducer = (state: TodoContextState, action: TodoReducerAction) 
           },
         ],
       }
+    }
+
+    case 'DELETE': {
+      const newTodos = todos?.filter(todo => todo.id !== id)
+
+      if (!newTodos) return state
+
+      return {
+        ...state,
+        todos: newTodos ?? [],
+      }
+    }
 
     default:
       return state

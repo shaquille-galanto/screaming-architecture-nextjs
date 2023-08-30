@@ -7,11 +7,13 @@ export type TodoContextState = {
 
 export type TodoContextDispatch = {
   handleAdd: (text: string) => void
+  handleDelete: (id: string) => void
   dispatch: Dispatch<TodoReducerAction>
 }
 
 export type TodoDispatchActions = {
   ADD: 'ADD'
+  DELETE: 'DELETE'
 }
 
 export type AddAction = {
@@ -22,7 +24,14 @@ export type AddAction = {
   }
 }
 
-export type TodoReducerAction = AddAction
+export type DeleteAction = {
+  type: TodoDispatchActions['DELETE']
+  payload: {
+    id: string
+  }
+}
+
+export type TodoReducerAction = AddAction | DeleteAction
 
 export type TodoProviderProps = {
   children: ReactNode

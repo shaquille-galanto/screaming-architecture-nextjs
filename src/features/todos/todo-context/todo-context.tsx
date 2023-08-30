@@ -26,9 +26,18 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     })
   }
 
+  const handleDelete = (id: string) => {
+    dispatch({
+      type: 'DELETE',
+      payload: {
+        id,
+      },
+    })
+  }
+
   return (
     <TodoStateContext.Provider value={state}>
-      <TodoDispatchContext.Provider value={{ handleAdd, dispatch }}>
+      <TodoDispatchContext.Provider value={{ handleAdd, handleDelete, dispatch }}>
         {children}
       </TodoDispatchContext.Provider>
     </TodoStateContext.Provider>

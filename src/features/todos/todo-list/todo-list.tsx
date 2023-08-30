@@ -12,7 +12,7 @@ export const TodoList = ({ ...props }: TodoListProps) => {
     <div className={styles.wrapper} {...props}>
       <h2 className={styles.title}>Todos</h2>
       <div className={styles.listWrapper}>
-        {todos ? (
+        {todos?.length ? (
           <ul className={styles.list}>
             {todos.map(todo => (
               <TodoItem key={todo.id} todo={todo} />
