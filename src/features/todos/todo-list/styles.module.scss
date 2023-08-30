@@ -1,0 +1,23 @@
+.wrapper {
+  margin-top: 24px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.listWrapper {
+  padding: 0 24px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}
+
+.list {
+  display: grid;
+}
+
+.emptyText {
+  padding: 24px 0;
+}
