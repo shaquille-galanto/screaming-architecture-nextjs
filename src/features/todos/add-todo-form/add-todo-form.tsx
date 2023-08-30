@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Input } from '@features/ui'
-import { Field, Form, Formik, FormikHelpers } from 'formik'
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import { useTodoDispatch } from '../todo-context'
 import styles from './styles.module.scss'
@@ -32,12 +32,19 @@ export const AddTodoForm = ({ ...props }: AddTodoFormProps) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={styles.className} {...props}>
-        <div className={styles.fieldWrapper}>
-          <Field as={Input} name="text" />
-          <Button type="submit">Add</Button>
-        </div>
-      </Form>
+      {({ isValid }) => (
+        <Form className={styles.form} {...props}>
+          <div className={styles.fieldWrapper}>
+            <Field as={Input} name="text" placeholder="Add todo" />
+            <p className={styles.errorMessage}>
+              <ErrorMessage name="text" />
+            </p>
+          </div>
+          <Button type="submit" disabled={!isValid}>
+            Add
+          </Button>
+        </Form>
+      )}
     </Formik>
   )
 }
