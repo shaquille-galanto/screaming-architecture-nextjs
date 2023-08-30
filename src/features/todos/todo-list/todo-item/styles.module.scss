@@ -1,0 +1,18 @@
+.item {
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 8px;
+
+  &:not(:first-child) {
+    border-top: 1px solid lightgray;
+  }
+}
+
+.buttonWrapper,
+.content {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
