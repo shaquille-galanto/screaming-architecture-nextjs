@@ -19,12 +19,20 @@
   column-gap: 8px;
 }
 
+.checkbox {
+  cursor: pointer;
+}
+
 .editInput {
   transition: 0.2s ease-out;
 
   &.readOnly {
     border-color: transparent;
     padding: 0;
+  }
+
+  &.completed {
+    text-decoration: line-through;
   }
 }
 

@@ -3,7 +3,7 @@
 import { Button, Input } from '@features/ui'
 import clsx from 'clsx'
 import { ErrorMessage, Field, Form, Formik, FormikHandlers } from 'formik'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import * as yup from 'yup'
 import { useTodoDispatch } from '../../todo-context'
 import styles from './styles.module.scss'
@@ -17,7 +17,7 @@ export const TodoItem = ({ todo, ...props }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const { handleDelete, handleEdit } = useTodoDispatch()
 
-  const { id, text } = todo
+  const { id, text, completed } = todo
 
   const onDelete = () => {
     handleDelete(id)
@@ -33,19 +33,32 @@ export const TodoItem = ({ todo, ...props }: TodoItemProps) => {
     handleSubmit()
   }
 
+  const onComplete = (e: ChangeEvent<HTMLInputElement>) => {
+    handleEdit({ ...todo, completed: e.target.checked })
+  }
+
   return (
     <li className={styles.item} {...props}>
       <Formik initialValues={{ text }} validationSchema={validationSchema} onSubmit={() => {}}>
         {({ isValid, handleSubmit }) => (
           <Form className={styles.form}>
             <div className={styles.content}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                className={styles.checkbox}
+                name="completed"
+                checked={completed}
+                onChange={onComplete}
+              />
               <div>
                 <Field
                   as={Input}
                   size="sm"
                   name="text"
-                  className={clsx(styles.editInput, { [styles.readOnly]: !isEditing })}
+                  className={clsx(styles.editInput, {
+                    [styles.readOnly]: !isEditing,
+                    [styles.completed]: completed,
+                  })}
                   readOnly={!isEditing}
                 />
                 <p className={styles.errorMessage}>
