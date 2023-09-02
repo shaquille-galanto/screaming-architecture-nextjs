@@ -3,6 +3,7 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "object-shorthand": "error"
   }
 }

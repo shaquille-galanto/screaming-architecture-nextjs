@@ -1,3 +1,10 @@
-const HomePage = () => <div>Home Page</div>
+import { TodoProvider } from '@features/todos'
+import { TodoSection } from './sections'
+
+const HomePage = () => (
+  <TodoProvider>
+    <TodoSection />
+  </TodoProvider>
+)
 
 export default HomePage
