@@ -2,7 +2,7 @@
 
 import { Button, Input } from '@features/ui'
 import clsx from 'clsx'
-import { ErrorMessage, Field, Form, Formik, FormikHandlers } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { ChangeEvent, useState } from 'react'
 import * as yup from 'yup'
 import { useTodoDispatch } from '../../todo-context'
@@ -27,10 +27,9 @@ export const TodoItem = ({ todo, ...props }: TodoItemProps) => {
     setIsEditing(true)
   }
 
-  const onSave = (handleSubmit: FormikHandlers['handleSubmit']) => () => {
+  const onSave = (text: string) => () => {
     handleEdit({ ...todo, text })
     setIsEditing(false)
-    handleSubmit()
   }
 
   const onComplete = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +39,7 @@ export const TodoItem = ({ todo, ...props }: TodoItemProps) => {
   return (
     <li className={styles.item} {...props}>
       <Formik initialValues={{ text }} validationSchema={validationSchema} onSubmit={() => {}}>
-        {({ isValid, handleSubmit }) => (
+        {({ isValid, values }) => (
           <Form className={styles.form}>
             <div className={styles.content}>
               <input
@@ -70,7 +69,7 @@ export const TodoItem = ({ todo, ...props }: TodoItemProps) => {
               <Button
                 type={isEditing ? 'submit' : 'button'}
                 size="sm"
-                onClick={isEditing ? onSave(handleSubmit) : onEdit}
+                onClick={isEditing ? onSave(values.text) : onEdit}
                 disabled={isEditing && !isValid}
               >
                 {isEditing ? 'Save' : 'Edit'}
