@@ -1,18 +1,22 @@
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userSetup } from '@test-utils'
+import { TodoProvider } from '../todo-context'
 import { AddTodoForm } from './add-todo-form'
 
-jest.mock('../todo-context', () => ({
-  useTodoDispatch: () => ({
-    handleAdd: jest.fn(),
-  }),
-}))
+Object.defineProperty(global, 'crypto', {
+  value: {
+    randomUUID: () => jest.fn(),
+  },
+})
 
 describe('<AddTodoForm>', () => {
-  it(`should display an error message when the input is empty and submit button should be disabled`, async () => {
-    const user = userEvent.setup()
+  let query: ReturnType<typeof userSetup>
 
-    const { getByRole, getByText } = render(<AddTodoForm />)
+  beforeEach(() => {
+    query = userSetup(<AddTodoForm />, { wrapper: TodoProvider })
+  })
+
+  it(`should display an error message when the input is empty and submit button should be disabled`, async () => {
+    const { user, getByRole, getByText } = query
 
     const { body } = document
     const input = getByRole('textbox')
@@ -23,14 +27,12 @@ describe('<AddTodoForm>', () => {
 
     const errorMessage = getByText('This field is required')
 
-    expect(submitButton).toBeDisabled()
     expect(errorMessage).toBeInTheDocument()
+    expect(submitButton).toBeDisabled()
   })
 
   it('should reset form after submission', async () => {
-    const user = userEvent.setup()
-
-    const { getByRole } = render(<AddTodoForm />)
+    const { user, getByRole } = query
 
     const input = getByRole('textbox')
     const submitButton = getByRole('button')
