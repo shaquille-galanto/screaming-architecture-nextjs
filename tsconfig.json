@@ -18,10 +18,10 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./src",
     "paths": {
-      "@features/*": ["./features/*"],
-      "@styles/*": ["./styles/*"]
+      "@features/*": ["./src/features/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@test-utils": ["./test-utils/index.ts"]
     },
     "types": ["@types/jest", "@testing-library/jest-dom"]
   },
