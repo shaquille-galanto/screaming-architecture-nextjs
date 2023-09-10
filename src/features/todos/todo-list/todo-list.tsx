@@ -1,8 +1,8 @@
 'use client'
 
 import { useTodoState } from '../todo-context'
+import { TodoItem } from '../todo-item'
 import styles from './styles.module.scss'
-import { TodoItem } from './todo-item'
 import { TodoListProps } from './types'
 
 export const TodoList = ({ ...props }: TodoListProps) => {

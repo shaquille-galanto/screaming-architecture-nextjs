@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { ChangeEvent, useState } from 'react'
 import * as yup from 'yup'
-import { useTodoDispatch } from '../../todo-context'
+import { useTodoDispatch } from '../todo-context'
 import styles from './styles.module.scss'
 import type { TodoItemProps } from './types'
 
