@@ -44,4 +44,5 @@ export type TodoReducerAction = AddAction | EditAction | DeleteAction
 
 export type TodoProviderProps = {
   children: ReactNode
+  initialTodos?: Todo[]
 }
