@@ -1,0 +1,21 @@
+import clsx from 'clsx'
+{{#isEqual isReusable "yes"}}
+import { forwardRef } from 'react'
+{{/isEqual}}
+import styles from './styles.module.scss'
+import type { {{pascalCase name}}Props } from './types'
+
+export const {{pascalCase name}} = 
+{{#isEqual isReusable "yes"}}
+  forwardRef<HTMLDivElement, {{pascalCase name}}Props>(({ className, ...props }, ref) => (
+    <div className={clsx(styles.wrapper, className)} ref={ref} {...props}>
+      {{pascalCase name}}
+    </div>
+  ))
+{{else}}
+  ({ className, ...props }: {{pascalCase name}}Props) => (
+    <div className={clsx(styles.wrapper, className)} {...props}>
+      {{pascalCase name}}
+    </div>
+  )
+{{/isEqual}}
