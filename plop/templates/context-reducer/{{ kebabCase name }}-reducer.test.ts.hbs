@@ -1,0 +1,21 @@
+import { {{ camelCase name}}Reducer } from './{{ kebabCase name}}-reducer'
+import { {{ pascalCase name}}ContextState, {{ pascalCase name}}ReducerAction } from './types'
+
+describe('{{ camelCase name}}Reducer', () => {
+  const state: {{ pascalCase name}}ContextState = {
+    isUpdating: false,
+  }
+
+  it('should handle update', () => {
+    const action: {{ pascalCase name}}ReducerAction = {
+      type: 'UPDATE',
+      payload: {
+        shouldUpdate: true,
+      },
+    }
+
+    const newState = {{ camelCase name}}Reducer(state, action)
+
+    expect(newState).toEqual({ isUpdating: true })
+  })
+})

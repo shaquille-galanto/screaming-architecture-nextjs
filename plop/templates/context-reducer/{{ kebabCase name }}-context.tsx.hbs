@@ -1,0 +1,54 @@
+'use client'
+
+import { Context, createContext, useContext, useReducer } from 'react'
+import { {{ camelCase name }}Reducer } from './{{ kebabCase name }}-reducer'
+import type { {{ pascalCase name }}ContextDispatch, {{ pascalCase name }}ContextState, {{ pascalCase name }}ProviderProps } from './types'
+
+export const {{ pascalCase name }}StateContext = createContext<{{ pascalCase name }}ContextState | null>(
+  null,
+) as Context<{{ pascalCase name }}ContextState>
+
+export const {{ pascalCase name }}DispatchContext = createContext<{{ pascalCase name }}ContextDispatch | null>(
+  null,
+) as Context<{{ pascalCase name }}ContextDispatch>
+
+const initialState: {{ pascalCase name }}ContextState = {
+  isUpdating: false,
+}
+
+export const {{ pascalCase name }}Provider = ({ children }: {{ pascalCase name }}ProviderProps) => {
+  const [state, dispatch] = useReducer({{ camelCase name }}Reducer, initialState)
+
+  const handleUpdate = (shouldUpdate: boolean) => {
+    dispatch({
+      type: 'UPDATE',
+      payload: {
+        shouldUpdate,
+      },
+    })
+  }
+
+  return (
+    <{{ pascalCase name }}StateContext.Provider value={state}>
+      <{{ pascalCase name }}DispatchContext.Provider value=\{{ handleUpdate, dispatch }}>
+        {children}
+      </{{ pascalCase name }}DispatchContext.Provider>
+    </{{ pascalCase name }}StateContext.Provider>
+  )
+}
+
+export const use{{ pascalCase name }}State = () => {
+  const context = useContext({{ pascalCase name }}StateContext)
+
+  if (!context) throw new Error('use{{ pascalCase name }}State must be used within the scope of {{ pascalCase name }}Provider')
+
+  return context
+}
+
+export const use{{ pascalCase name }}Dispatch = () => {
+  const context = useContext({{ pascalCase name }}DispatchContext)
+
+  if (!context) throw new Error('use{{ pascalCase name }}Dispatch must be used within the scope of {{ pascalCase name }}Provider')
+
+  return context
+}
