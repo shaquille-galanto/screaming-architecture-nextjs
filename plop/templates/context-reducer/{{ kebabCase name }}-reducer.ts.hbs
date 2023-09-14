@@ -1,0 +1,19 @@
+import type { {{ pascalCase name }}ContextState, {{ pascalCase name }}ReducerAction } from './types'
+
+export const {{ camelCase name }}Reducer = (state: {{ pascalCase name }}ContextState, action: {{ pascalCase name }}ReducerAction) => {
+  const { type, payload } = action
+
+  switch (type) {
+    case 'UPDATE': {
+      const { shouldUpdate } = payload
+
+      return {
+        ...state,
+        isUpdating: shouldUpdate,
+      }
+    }
+
+    default:
+      return state
+  }
+}

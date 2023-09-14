@@ -1,0 +1,27 @@
+import { Dispatch, ReactNode } from 'react'
+
+export type {{pascalCase name}}ContextState = {
+  isUpdating: boolean
+}
+
+export type {{pascalCase name}}ContextDispatch = {
+  handleUpdate: (shouldUpdate: boolean) => void
+  dispatch: Dispatch<{{pascalCase name}}ReducerAction>
+}
+
+export type {{pascalCase name}}DispatchActions = {
+  UPDATE: 'UPDATE'
+}
+
+export type UpdateAction = {
+  type: {{pascalCase name}}DispatchActions['UPDATE']
+  payload: {
+    shouldUpdate: boolean
+  }
+}
+
+export type {{pascalCase name}}ReducerAction = UpdateAction
+
+export type {{pascalCase name}}ProviderProps = {
+  children: ReactNode
+}
