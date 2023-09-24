@@ -2,8 +2,18 @@
   "extends": "next/core-web-vitals",
   "plugins": ["prettier"],
   "rules": {
+    "newline-before-return": "warn",
+    "no-console": [
+      "error",
+      {
+        "allow": ["error"]
+      }
+    ],
+    "object-shorthand": "error",
     "prettier/prettier": "error",
     "react/display-name": "off",
-    "object-shorthand": "error"
+    "react/no-unescaped-entities": "error",
+    "react/self-closing-comp": "error",
+    "react-hooks/exhaustive-deps": "error"
   }
 }
