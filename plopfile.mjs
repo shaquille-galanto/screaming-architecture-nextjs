@@ -21,10 +21,17 @@ export default function (
         message: 'File path:',
       },
       {
+        type: 'input',
+        name: 'element',
+        message: 'Element tag:',
+        default: 'div',
+      },
+      {
         type: 'list',
         name: 'isReusable',
         message: 'Is it reusable?:',
         choices: ['yes', 'no'],
+        default: 'no',
       },
     ],
     actions: [

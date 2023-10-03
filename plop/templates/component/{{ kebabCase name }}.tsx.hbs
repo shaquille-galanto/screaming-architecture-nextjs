@@ -14,8 +14,8 @@ export const {{pascalCase name}} =
   ))
 {{else}}
   ({ className, ...props }: {{pascalCase name}}Props) => (
-    <div className={clsx(styles.wrapper, className)} {...props}>
+    <{{ element }} className={clsx(styles.wrapper, className)} {...props}>
       {{pascalCase name}}
-    </div>
+    </{{ element }}>
   )
 {{/isEqual}}
