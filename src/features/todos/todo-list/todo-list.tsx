@@ -1,7 +1,7 @@
 'use client'
 
-import { useTodoState } from '../todo-context'
 import { TodoItem } from '../todo-item'
+import { useTodoState } from '../todo-provider'
 import styles from './styles.module.scss'
 import { TodoListProps } from './types'
 

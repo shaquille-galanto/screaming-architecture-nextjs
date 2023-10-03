@@ -1,5 +1,5 @@
 import { userSetup } from '@test-utils'
-import { TodoProvider, useTodoState } from '../todo-context'
+import { TodoProvider, useTodoState } from '../todo-provider'
 import { TodoItem } from './todo-item'
 
 describe('<TodoItem>', () => {

@@ -3,7 +3,7 @@
 import { Button, Input } from '@features/ui'
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import * as yup from 'yup'
-import { useTodoDispatch } from '../todo-context'
+import { useTodoDispatch } from '../todo-provider'
 import styles from './styles.module.scss'
 import type { AddTodoFormProps } from './types'
 

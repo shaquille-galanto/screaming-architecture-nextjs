@@ -60,13 +60,14 @@ export default function (
       {
         type: 'addMany',
         base: 'plop/templates/context-reducer',
-        destination: 'src/features/{{path}}/{{name}}',
+        destination: 'src/features/{{path}}/{{name}}-provider',
         templateFiles: 'plop/templates/context-reducer/*.hbs',
         stripExtensions: ['hbs'],
       },
       {
         type: 'formatCode',
         basePath: 'src/features',
+        nameSuffix: '-provider',
       },
     ],
   })

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { TodoProvider, useTodoState } from './todo-context'
+import { TodoProvider, useTodoState } from './todo-provider'
 import { TodoContextState } from './types'
 
 describe('<TodoProvider>', () => {
