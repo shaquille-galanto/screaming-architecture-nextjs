@@ -109,6 +109,36 @@ export default function (
     ],
   })
 
+  setGenerator('custom-hook', {
+    description: 'Custom Hook boilerplate',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Name:',
+      },
+      {
+        type: 'input',
+        name: 'path',
+        message: 'File path:',
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'src/features/{{path}}/use-{{name}}',
+        base: 'plop/templates/custom-hook',
+        templateFiles: 'plop/templates/custom-hook/*.hbs',
+        stripExtensions: ['hbs'],
+      },
+      {
+        type: 'formatCode',
+        basePath: 'src/features',
+        namePrefix: 'use-',
+      },
+    ],
+  })
+
   setActionType('formatCode', formatCode)
   setHelper('isEqual', checkEquality)
 }

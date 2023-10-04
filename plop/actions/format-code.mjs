@@ -1,7 +1,9 @@
 import { execSync } from 'child_process'
 
 export const formatCode = (answers, config) => {
-  const newName = `${answers.name}${config.nameSuffix ? config.nameSuffix : ''}`
+  const newName = `${config.namePrefix ? config.namePrefix : ''}${answers.name}${
+    config.nameSuffix ? config.nameSuffix : ''
+  }`
   const path = `${config.basePath}/${answers.path}/${newName}`
 
   try {
