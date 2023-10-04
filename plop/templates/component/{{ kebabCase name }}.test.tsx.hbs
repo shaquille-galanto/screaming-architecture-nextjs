@@ -3,11 +3,8 @@ import { {{pascalCase name}} } from './{{kebabCase name}}'
 
 describe('<{{pascalCase name}}>', () => {
   it('should render without any error', () => {
-    // Arrange
-    render(<{{pascalCase name}} />)
-
-    // Act
-
-    // Assert
+    expect(() => {
+      render(<{{pascalCase name}} />)
+    }).not.toThrow()
   })
 })
