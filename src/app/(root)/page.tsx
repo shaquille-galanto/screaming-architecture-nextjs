@@ -1,5 +1,4 @@
-import { TodoProvider } from '@features/todos'
-import { TodoSection } from './sections'
+import { TodoProvider, TodoSection } from '@features/todos'
 
 const HomePage = () => (
   <TodoProvider>
