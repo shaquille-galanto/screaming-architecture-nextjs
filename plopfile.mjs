@@ -37,8 +37,8 @@ export default function (
     actions: [
       {
         type: 'addMany',
-        base: 'plop/templates/component',
         destination: 'src/features/{{path}}/{{name}}',
+        base: 'plop/templates/component',
         templateFiles: 'plop/templates/component/*.hbs',
         stripExtensions: ['hbs'],
       },
@@ -66,9 +66,39 @@ export default function (
     actions: [
       {
         type: 'addMany',
-        base: 'plop/templates/context-reducer',
         destination: 'src/features/{{path}}/{{name}}-provider',
+        base: 'plop/templates/context-reducer',
         templateFiles: 'plop/templates/context-reducer/*.hbs',
+        stripExtensions: ['hbs'],
+      },
+      {
+        type: 'formatCode',
+        basePath: 'src/features',
+        nameSuffix: '-provider',
+      },
+    ],
+  })
+
+  setGenerator('context', {
+    description: 'Context boilerplate',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Name:',
+      },
+      {
+        type: 'input',
+        name: 'path',
+        message: 'File path:',
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'src/features/{{path}}/{{name}}-provider',
+        base: 'plop/templates/context',
+        templateFiles: 'plop/templates/context/*.hbs',
         stripExtensions: ['hbs'],
       },
       {
