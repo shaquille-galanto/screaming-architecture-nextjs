@@ -4,33 +4,36 @@ This project is a highly scalable project architecture for NextJS 13 which is bu
 
 ### 📜 Table of Contents
 
-- [Introduction to Screaming Architecture](#🎉-introduction-to-screaming-architecture)
-- [Rules](#📝-rules)
-  - [Group by feature](#✏️-rule-1-group-by-feature)
-  - [Limit nesting of feature files to two levels deep only.](#✏️-rule-2-limit-nesting-of-feature-files-to-two-levels-deep-only)
-  - [Create barrel file then name the component file by its name, not index.tsx](#✏️-rule-3-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
-  - [Create a type-only barrel file for types](#✏️-rule-4-create-a-type-only-barrel-file-for-types)
-  - [Place UI components inside features/ui directory](#✏️-rule-5-place-ui-components-inside-featuresui-directory)
-  - [Place utility functions inside features/utils directory](#✏️-rule-6-place-utility-functions-inside-featuresutils-directory)
-  - [Create separate directory for section components](#✏️-rule-7-create-separate-directory-for-section-components)
-  - [Use kebab-case for file/folder names.](#✏️-rule-8-use-kebab-case-for-filefolder-names)
-  - [Notes](#💡-notes)
-- [Feature File Structure](#📝-feature-file-structure)
-  - [Component](#✨-component)
-  - [Context-Reducer](#✨-context-reducer)
-  - [Context](#✨-context)
-  - [Hooks](#✨-hooks)
-  - [Utils](#✨-utils)
-- [Code Generator](#code-generator)
-- [Project Configurations & Setup](#project-configurations--setup)
-  - [Package Manager](#🔧-package-manager)
-  - [Continuous Integration (CI)](#🔧-continuous-integration-ci)
-  - [Husky Pre-Commit](#🔧-husky-pre-commit)
-  - [TypeScript](#🔧-typescript)
-  - [ESLint](#🔧-eslint)
-  - [VSCode Settings](#🔧-vscode-settings)
-  - [Testing Environment](#🔧-testing-environment)
-  - [SCSS Modules](#🔧-scss-modules)
+- [Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
+- [Rules](#-rules)
+  - [Group by feature](#-rule-1-group-by-feature)
+  - [Avoid nesting of feature files inside feature file](#-rule-2-avoid-nesting-of-feature-files-inside-feature-file)
+  - [Create barrel file then name the component file by its name, not index.tsx](#-rule-3-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
+  - [Create a type-only barrel file for types](#-rule-4-create-a-type-only-barrel-file-for-types)
+  - [Place UI components inside features/ui directory](#-rule-5-place-ui-components-inside-featuresui-directory)
+  - [Place utility functions inside features/utils directory](#-rule-6-place-utility-functions-inside-featuresutils-directory)
+  - [Create separate directory for section components](#-rule-7-create-separate-directory-for-section-components)
+  - [Use kebab-case for file/folder names](#-rule-8-use-kebab-case-for-filefolder-names)
+  - [Use relative import when importing from the same module](#-rule-9-use-relative-import-when-importing-from-the-same-module)
+  - [Notes](#-notes)
+- [Feature File Structure](#-feature-file-structure)
+  - [Component](#-component)
+  - [Section Component](#-section-component)
+  - [Context-Reducer](#-context-reducer)
+  - [Context](#-context)
+  - [Hooks](#-hooks)
+  - [Utils](#-utils)
+- [Code Generator](#-code-generator)
+- [Project Configurations & Setup](#-project-configurations--setup)
+  - [Package Manager](#-package-manager)
+  - [Continuous Integration (CI)](#-continuous-integration-ci)
+  - [Husky Pre-Commit](#-husky-pre-commit)
+  - [TypeScript](#-typescript)
+  - [ESLint](#-eslint)
+  - [VSCode Settings](#-vscode-settings)
+  - [NextJS Config](#-nextjs-config)
+  - [Testing Environment](#-testing-environment)
+  - [SCSS Modules](#-scss-modules)
 - [Resources About Screaming Architecture](#resources-about-screaming-architecture)
 
 ## 🎉 Introduction to Screaming Architecture
@@ -80,9 +83,9 @@ And here's how to fix it:
             └── 📄 index.ts
 ```
 
-### ✏️ Rule #2: Limit nesting of feature files to two levels deep only.
+### ✏️ Rule #2: Avoid nesting of feature files inside feature file
 
-Too much nesting can affect the readability of the project architecture, so as much as possible we want to minimize nesting of files. We want to limit it only to 2 levels deep. Let's say for example, `todo-item` is only being used in `todo-list` and we have `use-todo-item` which is being used inside `todo-item` only. We might think of nesting `use-todo-item` inside `todo-item` and nesting `todo-item` inside `todo-list`. But what if there's another file that is only being used in `use-todo-item`? The nesting would be endless, so it might be better to just put a limit for nesting files.
+Nesting of files can affect the readability of the project architecture, so as much as possible we want to avoid it. Let's say for example, `todo-item` is only being used in `todo-list` and we have `use-todo-item` which is being used inside `todo-item` only. We might think of nesting `use-todo-item` inside `todo-item` and nesting `todo-item` inside `todo-list`. But what if there's another file that is only being used in `use-todo-item`? The nesting would be endless, so it might be better to just avoid it from the start.
 
 ```
 ❌ Don't do this ❌
@@ -93,7 +96,7 @@ Too much nesting can affect the readability of the project architecture, so as m
         └── 📁 todos/
             │   ✅ 1st level
             └── 📁 todo-list/
-                │   ✅ 2nd level
+                │   ❌ 2nd level
                 ├── 📁 todo-item/
                 │   │   ❌ 3rd level
                 │   ├── 📁 text use-todo-item/
@@ -114,15 +117,17 @@ Too much nesting can affect the readability of the project architecture, so as m
         └── 📁 todos/
             │   ✅ 1st level
             ├── 📁 todo-list/
-            │   │   ✅ 2nd level
-            │   ├── 📁 todo-item/
-            │   │   ├── 📄 todo-item.tsx
-            │   │   └── 📄 index.ts
-            │   └── 📁 use-todo-item/
-            │       ├── 📄 use-todo-item.tsx
-            │       └── 📄 index.ts
-            ├── 📄 todo-list.tsx
-            └── 📄 index.ts
+            │   ├── 📄 todo-list.tsx
+            │   └── 📄 index.ts
+            │   ✅ 1st level
+            ├── 📁 todo-item/
+            │   ├── 📄 todo-item.tsx
+            │   └── 📄 index.ts
+            │   ✅ 1st level
+            └── 📁 use-todo-item/
+                ├── 📄 use-todo-item.tsx
+                └── 📄 index.ts
+
 ```
 
 ### ✏️ Rule #3: Create barrel file then name the component file by its name, not index.tsx
@@ -144,7 +149,7 @@ Naming the component file as `index.tsx` will create confusion in the directory 
     └── 📄 index.ts
 ```
 
-See [component structure](#✨-component) for reference.
+See [component structure](#-component) for reference.
 
 ### ✏️ Rule #4: Create a type-only barrel file for types
 
@@ -211,6 +216,7 @@ Section component is a component that contains composition or layout of multiple
             │   │   ├── 📄 todo-section.tsx
             │   │   ├── 📄 index.ts
             │   │   └── 📄 types.ts
+            │   │   # Barrel file for sections
             │   └── 📄 index.ts
             ├── 📄 index.ts
             └── 📄 types.ts
@@ -225,26 +231,54 @@ const TodoSection = () => (
 )
 ```
 
-### ✏️ Rule #8: Use kebab-case for file/folder names.
+### ✏️ Rule #8: Use kebab-case for file/folder names
 
-A common way of naming file in react is to name component as PascalCase, and non-component as camelCase. However, it promotes inconsistency and could probably give confusion to the developers. Plus, it is prone to have conflicts with case-sensitive file systems like CI, Version Control and Operating Systems. By using kebab-case, we can avoid those problems. See [feature file structure](#📝-feature-file-structure) for reference.
+A common way of naming file in react is to name component as PascalCase, and non-component as camelCase. However, it promotes inconsistency and could probably give confusion to the developers. Plus, it is prone to have conflicts with case-sensitive file systems like CI, Version Control and Operating Systems. By using kebab-case, we can avoid those problems. See [feature file structure](#-feature-file-structure) for reference.
+
+### ✏️ Rule #9: Use relative import when importing from the same module
+
+By having feature-based directory and barrel files, this type of architecture is prone to having circular dependency by importing a module from the same module. For example we have this directory setup:
+
+```
+└── 📁 src/
+    └── 📁 features/
+        └── 📁 todos/
+            ├── 📁 add-todo-form/
+            │   ├── 📄 add-todo-form.tsx
+            │   ├── 📄 index.ts
+            │   └── 📄 types.ts
+            ├── 📁 todo-list/
+            │   ├── 📄 todo-list.tsx
+            │   ├── 📄 index.ts
+            │   └── 📄 types.ts
+            ├── 📄 index.ts
+            └── 📄 types.ts
+```
+
+Then, inside `todo-list` if you want to import `add-todo-form`, you shouldn't import it using [path alias](#-typescript), use relative path instead.
+
+```ts
+// Alias path
+// ❌ Don't do this ❌
+import { AddTodoForm } from '@features/todos'
+```
+
+```ts
+// Relative path
+// ✅ Do this instead ✅
+import { AddTodoForm } from '../add-todo-form'
+```
 
 ### 💡 Notes
 
 Although this project have certain rules to achieve the goal of **Screaming Architecture**, there can still be a lot of different implementations of it. It will only be a matter of preference and what will work for you or everyone in the team. There's no right or wrong here as long as you apply the important rule of **Screaming Architecture**, which is to tell the readers and developers about the system, not about the frameworks you used in your system.
 
-## 📝 Feature File Structure
+## 📂 Feature File Structure
 
 ### ✨ Component
 
 ```
 └── 📁 todo-list/
-    ├── 📁 todo-item/
-    │   ├── 📄 index.ts
-    │   ├── 📄 styles.module.scss
-    │   ├── 📄 todo-item.test.tsx
-    │   ├── 📄 todo-item.tsx
-    │   └── 📄 types.ts
     ├── 📄 index.ts
     ├── 📄 styles.module.scss
     ├── 📄 todo-list.test.tsx
@@ -252,17 +286,33 @@ Although this project have certain rules to achieve the goal of **Screaming Arch
     └── 📄 types.ts
 ```
 
+### ✨ Section Component
+
+```
+└── 📁 todos/
+    └── 📁 sections/
+        ├── 📁 todo-section/
+        │   ├── 📄 index.ts
+        │   ├── 📄 todo-section.tsx
+        │   ├── 📄 todo-section.test.tsx
+        │   └── 📄 types.ts
+        ├── 📁 todo-form-section/
+        │   ├── 📄 index.ts
+        │   ├── 📄 todo-form-section.tsx
+        │   ├── 📄 todo-form-section.test.tsx
+        │   └── 📄 types.ts
+        └── 📄 index.ts
+```
+
 ### ✨ Context-Reducer
 
 ```
 └── 📁 todo-provider/
-    ├── 📁 todo-reducer/
-    │   ├── 📄 index.ts
-    │   ├── 📄 todo-reducer.test.ts
-    │   └── 📄 todo-reducer.ts
     ├── 📄 index.ts
     ├── 📄 todo-provider.test.tsx
     ├── 📄 todo-provider.tsx
+    ├── 📄 todo-reducer.test.ts
+    ├── 📄 todo-reducer.ts
     └── 📄 types.ts
 ```
 
@@ -309,7 +359,7 @@ pnpm plop
 
 <img src="https://example.com/path/to/your-gif.gif" alt="Your GIF">
 
-## Project Configurations & Setup
+## ⚙️ Project Configurations & Setup
 
 ### 🔧 Package Manager
 
@@ -363,6 +413,10 @@ The vscode settings are configured to align with the code standards of this proj
 
 - **Fix eslint errors on save**.
   - This will automatically fix eslint errors on the specific file you save.
+
+### 🔧 NextJS Config
+
+This project uses the default config of NextJS and just configured with [circular-dependency-plugin](https://www.npmjs.com/package/circular-dependency-plugin) in webpack to trace circular dependency errors easily.
 
 ### 🔧 Testing Environment
 
