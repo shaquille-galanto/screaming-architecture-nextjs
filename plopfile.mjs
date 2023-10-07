@@ -2,6 +2,7 @@
 
 import { formatCode } from './plop/actions/index.mjs'
 import { checkEquality } from './plop/helpers/index.mjs'
+import { BASE_PROMPTS, setBaseActions } from './plop/utils/index.mjs'
 
 export default function (
   /** @type {import('plop').NodePlopAPI} */
@@ -10,65 +11,46 @@ export default function (
   setGenerator('component', {
     description: 'Component boilerplate',
     prompts: [
+      ...BASE_PROMPTS,
       {
         type: 'input',
-        name: 'name',
-        message: 'Name:',
-      },
-      {
-        type: 'input',
-        name: 'path',
-        message: 'File path:',
+        name: 'element',
+        message: 'Element tag:',
+        default: 'div',
       },
       {
         type: 'list',
         name: 'isReusable',
         message: 'Is it reusable?:',
         choices: ['yes', 'no'],
+        default: 'no',
       },
     ],
-    actions: [
-      {
-        type: 'addMany',
-        base: 'plop/templates/component',
-        destination: 'src/features/{{path}}/{{name}}',
-        templateFiles: 'plop/templates/component/*.hbs',
-        stripExtensions: ['hbs'],
-      },
-      {
-        type: 'formatCode',
-        basePath: 'src/features',
-      },
-    ],
+    actions: setBaseActions({ generatorName: 'component' }),
   })
 
   setGenerator('context-reducer', {
     description: 'Context-Reducer boilerplate',
-    prompts: [
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Name:',
-      },
-      {
-        type: 'input',
-        name: 'path',
-        message: 'File path:',
-      },
-    ],
-    actions: [
-      {
-        type: 'addMany',
-        base: 'plop/templates/context-reducer',
-        destination: 'src/features/{{path}}/{{name}}',
-        templateFiles: 'plop/templates/context-reducer/*.hbs',
-        stripExtensions: ['hbs'],
-      },
-      {
-        type: 'formatCode',
-        basePath: 'src/features',
-      },
-    ],
+    prompts: BASE_PROMPTS,
+    actions: setBaseActions({ generatorName: 'context-reducer', nameSuffix: '-provider' }),
+  })
+
+  setGenerator('context', {
+    description: 'Context boilerplate',
+    prompts: BASE_PROMPTS,
+    actions: setBaseActions({ generatorName: 'context', nameSuffix: '-provider' }),
+  })
+
+  setGenerator('custom-hook', {
+    description: 'Custom Hook boilerplate',
+    prompts: BASE_PROMPTS,
+    actions: setBaseActions({ generatorName: 'custom-hook', namePrefix: 'use-' }),
+  })
+
+  setGenerator('utils', {
+    description: 'Custom Hook boilerplate',
+    prompts: BASE_PROMPTS,
+    actions: setBaseActions({ generatorName: 'utils' }),
   })
 
   setActionType('formatCode', formatCode)

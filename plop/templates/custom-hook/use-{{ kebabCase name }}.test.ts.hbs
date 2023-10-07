@@ -1,0 +1,11 @@
+import { renderHook } from '@testing-library/react'
+import { use{{ pascalCase name }} } from './use-{{ kebabCase name }}'
+
+describe('use{{ pascalCase name }}', () => {
+  // sample test only, replace this with real test
+  it('should trigger without error', () => {
+    expect(() => {
+      renderHook(() => use{{ pascalCase name }}())
+    }).not.toThrow()
+  })
+})

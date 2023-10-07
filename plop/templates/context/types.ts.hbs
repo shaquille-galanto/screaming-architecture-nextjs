@@ -1,0 +1,10 @@
+import { Dispatch, ReactNode, SetStateAction } from 'react'
+
+export type {{ pascalCase name}}ContextType = {
+  isUpdating: boolean
+  setIsUpdating: Dispatch<SetStateAction<boolean>>
+}
+
+export type {{ pascalCase name}}ProviderProps = {
+  children: ReactNode
+}

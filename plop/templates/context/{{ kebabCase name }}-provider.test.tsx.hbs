@@ -1,0 +1,15 @@
+import { render } from '@testing-library/react'
+import { {{pascalCase name}}Provider } from './{{kebabCase name}}-provider'
+
+describe('<{{pascalCase name}}Provider>', () => {
+  // sample test only, replace this with real test
+  it('should render without any error', () => {
+    expect(() => {
+      render(
+        <{{pascalCase name}}Provider>
+          <></>
+        </{{pascalCase name}}Provider>,
+      )
+    }).not.toThrow()
+  })
+})

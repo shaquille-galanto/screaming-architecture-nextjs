@@ -2,12 +2,10 @@ import { render } from '@testing-library/react'
 import { {{pascalCase name}} } from './{{kebabCase name}}'
 
 describe('<{{pascalCase name}}>', () => {
+  // sample test only, replace this with real test
   it('should render without any error', () => {
-    // Arrange
-    render(<{{pascalCase name}} />)
-
-    // Act
-
-    // Assert
+    expect(() => {
+      render(<{{pascalCase name}} />)
+    }).not.toThrow()
   })
 })

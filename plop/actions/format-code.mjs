@@ -1,7 +1,11 @@
 import { execSync } from 'child_process'
 
 export const formatCode = (answers, config) => {
-  const path = `${config.basePath}/${answers.path}/${answers.name}`
+  const newName = `${config.namePrefix ? config.namePrefix : ''}${answers.name}${
+    config.nameSuffix ? config.nameSuffix : ''
+  }`
+  const path = `${config.basePath}/${answers.path}/${newName}`
+
   try {
     execSync(`pnpm prettier --write ${path}`)
     execSync(`pnpm eslint --fix ${path}`)

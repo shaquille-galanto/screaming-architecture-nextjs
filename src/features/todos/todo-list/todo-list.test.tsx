@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { TodoProvider } from '../todo-context'
+import { TodoProvider } from '../todo-provider'
 import { TodoList } from './todo-list'
 
 describe('<TodoList>', () => {
