@@ -1,4 +1,4 @@
-name: Error checking on lint, types and tests
+name: Error Check
 
 on:
   pull_request:
