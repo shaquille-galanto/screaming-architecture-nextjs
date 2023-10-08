@@ -9,6 +9,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "jest",
+    "cypress:open": "cypress open",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.4",
     "circular-dependency-plugin": "^5.2.2",
+    "cypress": "^13.3.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
@@ -38,6 +40,7 @@
     "jest-environment-jsdom": "^29.6.4",
     "plop": "^4.0.0",
     "prettier": "^3.0.2",
-    "sass": "^1.66.1"
+    "sass": "^1.66.1",
+    "ts-node": "^10.9.1"
   }
 }
