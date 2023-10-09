@@ -8,33 +8,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16]
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      # This action will install all dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          build: pnpm build
+          start: pnpm start
 
-      - name: Install Dependencies
-        run: pnpm install
+      - name: Run Jest
+        run: pnpm test
 
       - name: Run ESLint
         run: pnpm  lint
 
       - name: Run Typecheck
         run: pnpm typecheck
-
-      - name: Run Tests
-        run: npm test
