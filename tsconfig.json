@@ -18,13 +18,22 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@features/*": ["./src/features/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@test-utils": ["./test-utils/index.ts"]
+      "@features/*": ["src/features/*"],
+      "@styles/*": ["src/styles/*"],
+      "@test-utils": ["test-utils/index.ts"]
     },
     "types": ["@types/jest", "@testing-library/jest-dom"]
   },
+  // TODO: remove when cypress issue with moduleResolution has been resolved
+  // https://github.com/cypress-io/cypress/issues/27448
+  "ts-node": {
+    "compilerOptions": {
+      "module": "esnext",
+      "moduleResolution": "node"
+    }
+  },
   "include": ["next-env.d.ts", "global.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress", "./cypress.config.ts"]
 }

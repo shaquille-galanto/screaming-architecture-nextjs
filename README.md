@@ -371,11 +371,7 @@ This project uses `pnpm` as package manager. `pnpm` is known to be 3 times faste
 
 ### 🔧 Continuous Integration (CI)
 
-CI for the following are still work in progress:
-
-- ESLint
-- Typecheck
-- Tests
+This project runs an automated error-checks workflow, including linting, type checking, and testing in every pull request. This will help developers to identify and address potential errors, ensuring code quality in the codebase.
 
 ### 🔧 Husky Pre-Commit
 
