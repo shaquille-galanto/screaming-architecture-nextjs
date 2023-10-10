@@ -54,11 +54,11 @@ This project is a highly scalable architecture for NextJS 13, built and configur
 
 Adhere to the following guidelines when grouping by feature:
 
-- Store all feature codes within the `src/features`` directory.
+- Store all feature codes within the `src/features` directory.
 - Co-locate all files related to a specific feature.
 - Avoid naming folders based on the framework you are using.
 
-Here's an example of structure that does not comply with all the rules mentioned above:
+Here's an example of structure that does not comply with all the guidelines mentioned above:
 
 ```
 ❌ Don't do this ❌
@@ -126,7 +126,7 @@ export const debounce = () => {}
 export const useMediaQuery = () => {}
 ```
 
-### ✏️ Rule #3: Avoid nesting of feature files inside feature file
+### ✏️ Rule #3: Avoid nesting of feature files inside a feature file
 
 Nesting of files can affect the readability of the project architecture, so as much as possible we want to avoid it. For instance, consider the scenario where `todo-item` is only being used in `todo-list` and we have `use-todo-item` which is being used inside `todo-item` only. We might think of nesting `use-todo-item` inside `todo-item` and nesting `todo-item` inside `todo-list`. But what if there's another file that is only being used in `use-todo-item`? The nesting would be endless, so it might be better to just avoid it from the start.
 
@@ -142,7 +142,7 @@ Nesting of files can affect the readability of the project architecture, so as m
                 │   ❌ 2nd level
                 ├── 📁 todo-item/
                 │   │   ❌ 3rd level
-                │   ├── 📁 text use-todo-item/
+                │   ├── 📁 use-todo-item/
                 │   │   ├── 📄 use-todo-item.tsx
                 │   │   └── 📄 index.ts
                 │   ├── 📄 todo-item.tsx
@@ -231,7 +231,7 @@ import type { TodoListProps } from '@features/todos/types'
 
 ### ✏️ Rule #6: Place UI components inside features/ui directory
 
-Treat every component as a feature, even if that component doesn't do anything besides displaying its UI on the webpage. UI components are the components that is shared/reusable across the app like `<Button>`, `<Input>`, `<Container>`, etc. Those components should be placed inside `features/ui` directory.
+Treat every component as a feature, even if that component doesn't do anything besides displaying its UI on the webpage. UI components are the components that is shared/reusable and have generic purpose like `<Button>`, `<Input>`, `<Container>`, etc. Those components should be placed inside `features/ui` directory.
 
 ### ✏️ Rule #7: Place utility functions inside features/utils directory
 
@@ -276,7 +276,7 @@ const TodoSection = () => (
 
 ### ✏️ Rule #9: Use kebab-case for file/folder names
 
-A common convention in React is to name components in PascalCase and non-components in camelCase. However, this can lead to inconsistency and potentially confuse developers. Moreover, it is susceptible to conflicts with case-sensitive file systems, such as Continuous Integration, Version Control, and Operating Systems. Using kebab-case helps avoid these issues. See [feature file structure](#-feature-file-structure) for reference.
+A common convention in React is to name components in `PascalCase` and non-components in `camelCase`. However, this can lead to inconsistency and potentially confuse developers. Moreover, it is susceptible to conflicts with case-sensitive file systems, such as Continuous Integration, Version Control, and Operating Systems. Using kebab-case helps avoid these issues. See [feature file structure](#-feature-file-structure) for reference.
 
 ### ✏️ Rule #10: Use relative import when importing from the same module
 
@@ -298,7 +298,7 @@ By having feature-based directory and barrel files, this type of architecture is
             └── 📄 types.ts
 ```
 
-Then, inside `todo-list` if you want to import `add-todo-form`, you shouldn't import it using [path alias](#-typescript), use relative path instead.
+Inside the `todo-list`, if you intend to import the `add-todo-form`, it's advisable to refrain from using a path alias and opt for a relative path instead.
 
 ```ts
 // Alias path
@@ -450,7 +450,7 @@ These list of prompts will show after running that command
 
 | Prompt      | Description                                                                                                 | Default Value |
 | :---------- | :---------------------------------------------------------------------------------------------------------- | :-----------: |
-| `Name`      | Input the name of the component you want to generate .<br/> Name will have `-provider` suffix automatically |               |
+| `Name`      | Input the name of the component you want to generate. <br/> Name will have `-provider` suffix automatically |               |
 | `File path` | Input the file path for where you want place the component                                                  |               |
 
 <img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context_ldc23z.png" alt="generate-context-demo">
@@ -505,7 +505,7 @@ That command will generate a `non-reusable` component named `todo-item` with `di
 
 ### 🔧 Package Manager
 
-This project uses `pnpm` as package manager. `pnpm` is known to be 3 times faster and more efficient than `npm` and it is also faster than `yarn` in many cases. There are still more reasons to be choosing `pnpm` over `npm` and `yarn`, but it is still a matter of team's preference. Listed down below some useful resources about `pnpm`:
+This project uses `pnpm` as package manager. `pnpm` is known to be 3 times faster and more efficient than `npm` and it is also faster than `yarn` in many cases. There are still more reasons to be choosing `pnpm` over `npm` and `yarn`, but it is still a matter of team's preference. Listed down below some helpful resources about `pnpm`:
 
 - [Why you should prefer using pnpm over npm and yarn?](https://refine.dev/blog/pnpm-vs-npm-and-yarn/)
 - [JavaScript Package Managers: NPM vs YARN vs PNPM](https://www.atatus.com/blog/npm-vs-yarn-vs-pnpm/)
