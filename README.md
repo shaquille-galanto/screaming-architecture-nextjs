@@ -4,18 +4,18 @@ This project is a highly scalable architecture for NextJS 13, built and configur
 
 ### 📜 Table of Contents
 
-- [Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
+- [ Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
 - [Rules](#-rules)
-  - [Group by feature](#-rule-1-group-by-feature)
-  - [Create a separate file for each module](#-rule-2-create-a-separate-file-for-each-module)
-  - [Avoid nesting of feature files inside feature file](#-rule-3-avoid-nesting-of-feature-files-inside-feature-file)
-  - [Create barrel file then name the component file by its name, not index.tsx](#-rule-4-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
-  - [Create a type-only barrel file for types](#-rule-5-create-a-type-only-barrel-file-for-types)
-  - [Place UI components inside features/ui directory](#-rule-6-place-ui-components-inside-featuresui-directory)
-  - [Place utility functions inside features/utils directory](#-rule-7-place-utility-functions-inside-featuresutils-directory)
-  - [Create separate directory for section components](#-rule-8-create-separate-directory-for-section-components)
-  - [Use kebab-case for file/folder names](#-rule-9-use-kebab-case-for-filefolder-names)
-  - [Use relative import when importing from the same module](#-rule-10-use-relative-import-when-importing-from-the-same-module)
+  - [Group by feature](#%EF%B8%8F-rule-1-group-by-feature)
+  - [Create a separate file for each module](#%EF%B8%8F-rule-2-create-a-separate-file-for-each-module)
+  - [Avoid nesting of feature files inside feature file](#%EF%B8%8F-rule-3-avoid-nesting-of-feature-files-inside-feature-file)
+  - [Create barrel file then name the component file by its name, not index.tsx](#%EF%B8%8F-rule-4-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
+  - [Create a type-only barrel file for types](#%EF%B8%8F-rule-5-create-a-type-only-barrel-file-for-types)
+  - [Place UI components inside features/ui directory](#%EF%B8%8F-rule-6-place-ui-components-inside-featuresui-directory)
+  - [Place utility functions inside features/utils directory](#%EF%B8%8F-rule-7-place-utility-functions-inside-featuresutils-directory)
+  - [Create separate directory for section components](#%EF%B8%8F-rule-8-create-separate-directory-for-section-components)
+  - [Use kebab-case for file/folder names](#%EF%B8%8F-rule-9-use-kebab-case-for-filefolder-names)
+  - [Use relative import when importing from the same module](#%EF%B8%8F-rule-10-use-relative-import-when-importing-from-the-same-module)
   - [Notes](#-notes)
 - [Feature File Structure](#-feature-file-structure)
   - [Component](#-component)
@@ -32,7 +32,7 @@ This project is a highly scalable architecture for NextJS 13, built and configur
   - [Generate Custom-Hook](#-generate-custom-hook)
   - [Generate Utils](#-generate-utils)
   - [Shorthand Command](#-shorthand-command)
-- [Project Configurations & Setup](#-project-configurations--setup)
+- [Project Configurations & Setup](#%EF%B8%8F-project-configurations--setup)
   - [Package Manager](#-package-manager)
   - [Continuous Integration (CI)](#-continuous-integration-ci)
   - [Husky Pre-Commit](#-husky-pre-commit)
@@ -112,7 +112,6 @@ A typical example of this is creating a one file for all the utility functions:
 // ❌ Don't do this ❌
 
 // index.ts
-
 export const debounce = () => {}
 export const useMediaQuery = () => {}
 ```
