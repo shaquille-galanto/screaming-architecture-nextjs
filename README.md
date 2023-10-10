@@ -1,20 +1,21 @@
 ## 📔 Overview
 
-This project is a highly scalable project architecture for NextJS 13 which is built and configured to easily achieve quality and consistency of codes among the team of developers.
+This project is a highly scalable architecture for NextJS 13, built and configured to easily achieve quality and consistency of code among the team of developers.
 
 ### 📜 Table of Contents
 
-- [Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
+- [ Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
 - [Rules](#-rules)
-  - [Group by feature](#-rule-1-group-by-feature)
-  - [Avoid nesting of feature files inside feature file](#-rule-2-avoid-nesting-of-feature-files-inside-feature-file)
-  - [Create barrel file then name the component file by its name, not index.tsx](#-rule-3-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
-  - [Create a type-only barrel file for types](#-rule-4-create-a-type-only-barrel-file-for-types)
-  - [Place UI components inside features/ui directory](#-rule-5-place-ui-components-inside-featuresui-directory)
-  - [Place utility functions inside features/utils directory](#-rule-6-place-utility-functions-inside-featuresutils-directory)
-  - [Create separate directory for section components](#-rule-7-create-separate-directory-for-section-components)
-  - [Use kebab-case for file/folder names](#-rule-8-use-kebab-case-for-filefolder-names)
-  - [Use relative import when importing from the same module](#-rule-9-use-relative-import-when-importing-from-the-same-module)
+  - [Group by feature](#%EF%B8%8F-rule-1-group-by-feature)
+  - [Create a separate file for each module](#%EF%B8%8F-rule-2-create-a-separate-file-for-each-module)
+  - [Avoid nesting of feature files inside feature file](#%EF%B8%8F-rule-3-avoid-nesting-of-feature-files-inside-feature-file)
+  - [Create barrel file then name the component file by its name, not index.tsx](#%EF%B8%8F-rule-4-create-barrel-file-then-name-the-component-file-by-its-name-not-indextsx)
+  - [Create a type-only barrel file for types](#%EF%B8%8F-rule-5-create-a-type-only-barrel-file-for-types)
+  - [Place UI components inside features/ui directory](#%EF%B8%8F-rule-6-place-ui-components-inside-featuresui-directory)
+  - [Place utility functions inside features/utils directory](#%EF%B8%8F-rule-7-place-utility-functions-inside-featuresutils-directory)
+  - [Create separate directory for section components](#%EF%B8%8F-rule-8-create-separate-directory-for-section-components)
+  - [Use kebab-case for file/folder names](#%EF%B8%8F-rule-9-use-kebab-case-for-filefolder-names)
+  - [Use relative import when importing from the same module](#%EF%B8%8F-rule-10-use-relative-import-when-importing-from-the-same-module)
   - [Notes](#-notes)
 - [Feature File Structure](#-feature-file-structure)
   - [Component](#-component)
@@ -24,7 +25,14 @@ This project is a highly scalable project architecture for NextJS 13 which is bu
   - [Hooks](#-hooks)
   - [Utils](#-utils)
 - [Code Generator](#-code-generator)
-- [Project Configurations & Setup](#-project-configurations--setup)
+  - [Base Path](#-base-path)
+  - [Generate Component](#-generate-component)
+  - [Generate Context-Reducer](#-generate-context-reducer)
+  - [Generate Context](#-generate-context)
+  - [Generate Custom-Hook](#-generate-custom-hook)
+  - [Generate Utils](#-generate-utils)
+  - [Shorthand Command](#-shorthand-command)
+- [Project Configurations & Setup](#%EF%B8%8F-project-configurations--setup)
   - [Package Manager](#-package-manager)
   - [Continuous Integration (CI)](#-continuous-integration-ci)
   - [Husky Pre-Commit](#-husky-pre-commit)
@@ -34,7 +42,7 @@ This project is a highly scalable project architecture for NextJS 13 which is bu
   - [NextJS Config](#-nextjs-config)
   - [Testing Environment](#-testing-environment)
   - [SCSS Modules](#-scss-modules)
-- [Resources About Screaming Architecture](#resources-about-screaming-architecture)
+- [Resources About Screaming Architecture](#-resources-about-screaming-architecture)
 
 ## 🎉 Introduction to Screaming Architecture
 
@@ -44,13 +52,13 @@ This project is a highly scalable project architecture for NextJS 13 which is bu
 
 ### ✏️ Rule #1: Group by feature
 
-Follow these rules for grouping by feature
+Adhere to the following guidelines when grouping by feature:
 
-- Place all feature codes inside `src/features` directory
-- Co-locate all related files of a specific feature
-- Don't name your folders that describes the framework that you are using
+- Store all feature codes within the `src/features` directory.
+- Co-locate all files related to a specific feature.
+- Avoid naming folders based on the framework you are using.
 
-Here's an example of structure that does not comply with all the rules mentioned above:
+Here's an example of structure that does not comply with all the guidelines mentioned above:
 
 ```
 ❌ Don't do this ❌
@@ -83,9 +91,44 @@ And here's how to fix it:
             └── 📄 index.ts
 ```
 
-### ✏️ Rule #2: Avoid nesting of feature files inside feature file
+### ✏️ Rule #2: Create a separate file for each module
 
-Nesting of files can affect the readability of the project architecture, so as much as possible we want to avoid it. Let's say for example, `todo-item` is only being used in `todo-list` and we have `use-todo-item` which is being used inside `todo-item` only. We might think of nesting `use-todo-item` inside `todo-item` and nesting `todo-item` inside `todo-list`. But what if there's another file that is only being used in `use-todo-item`? The nesting would be endless, so it might be better to just avoid it from the start.
+There are a lot of potential drawbacks to having multiple modules in a single file. To mention a few:
+
+- Maintainability
+
+  - As the size of your project grows, having multiple modules in one file can lead to increased complexity. It becomes harder to locate and modify specific sections of code.
+
+- Testing
+
+  - Having separate files for each module allows for more granular testing. If modules are combined into one file, it might be challenging to isolate and test specific functionalities independently.
+
+- Collaboration
+  - When multiple developers are working on the same file, it's more likely that they'll need to make changes to the same module. This can result in merge conflicts and hinder collaborative development.
+
+A typical example of this is creating a one file for all the utility functions:
+
+```ts
+// ❌ Don't do this ❌
+
+// index.ts
+export const debounce = () => {}
+export const useMediaQuery = () => {}
+```
+
+```ts
+// ✅ Do this instead ✅
+
+// debounce.ts
+export const debounce = () => {}
+
+// use-media-query.ts
+export const useMediaQuery = () => {}
+```
+
+### ✏️ Rule #3: Avoid nesting of feature files inside a feature file
+
+Nesting of files can affect the readability of the project architecture, so as much as possible we want to avoid it. For instance, consider the scenario where `todo-item` is only being used in `todo-list` and we have `use-todo-item` which is being used inside `todo-item` only. We might think of nesting `use-todo-item` inside `todo-item` and nesting `todo-item` inside `todo-list`. But what if there's another file that is only being used in `use-todo-item`? The nesting would be endless, so it might be better to just avoid it from the start.
 
 ```
 ❌ Don't do this ❌
@@ -99,7 +142,7 @@ Nesting of files can affect the readability of the project architecture, so as m
                 │   ❌ 2nd level
                 ├── 📁 todo-item/
                 │   │   ❌ 3rd level
-                │   ├── 📁 text use-todo-item/
+                │   ├── 📁 use-todo-item/
                 │   │   ├── 📄 use-todo-item.tsx
                 │   │   └── 📄 index.ts
                 │   ├── 📄 todo-item.tsx
@@ -130,7 +173,7 @@ Nesting of files can affect the readability of the project architecture, so as m
 
 ```
 
-### ✏️ Rule #3: Create barrel file then name the component file by its name, not index.tsx
+### ✏️ Rule #4: Create barrel file then name the component file by its name, not index.tsx
 
 Naming the component file as `index.tsx` will create confusion in the directory and will make it harder to search a specific component in IDE, resulting in poor developer experience.
 
@@ -151,7 +194,7 @@ Naming the component file as `index.tsx` will create confusion in the directory 
 
 See [component structure](#-component) for reference.
 
-### ✏️ Rule #4: Create a type-only barrel file for types
+### ✏️ Rule #5: Create a type-only barrel file for types
 
 It is easier to use `Type-Only Imports and Export` with types when we store all types in a type-only barrel file. See illustration below.
 
@@ -186,15 +229,15 @@ export type * from './todo-list/types'
 import type { TodoListProps } from '@features/todos/types'
 ```
 
-### ✏️ Rule #5: Place UI components inside features/ui directory
+### ✏️ Rule #6: Place UI components inside features/ui directory
 
-Treat every component as a feature even if that component doesn't do anything besides displaying its UI in the webpage. UI components are the components that is shared/reusable across the app like `<Button>`, `<Input>`, `<Container>`, etc. Those components should be placed inside `features/ui` directory.
+Treat every component as a feature, even if that component doesn't do anything besides displaying its UI on the webpage. UI components are the components that is shared/reusable and have generic purpose like `<Button>`, `<Input>`, `<Container>`, etc. Those components should be placed inside `features/ui` directory.
 
-### ✏️ Rule #6: Place utility functions inside features/utils directory
+### ✏️ Rule #7: Place utility functions inside features/utils directory
 
 Utility function is a function designed to perform a specific task or set of tasks, often focused on providing common functionalities that can be reused across the app. Just like UI components, utility functions are also considered a feature and should be placed inside `features/utils` directory.
 
-### ✏️ Rule #7: Create separate directory for section components
+### ✏️ Rule #8: Create separate directory for section components
 
 Section component is a component that contains composition or layout of multiple feature components. It usually doesn't contain any logic, only styles that controls the layout. Each feature item can have section directory that contains section components.
 
@@ -231,11 +274,11 @@ const TodoSection = () => (
 )
 ```
 
-### ✏️ Rule #8: Use kebab-case for file/folder names
+### ✏️ Rule #9: Use kebab-case for file/folder names
 
-A common way of naming file in react is to name component as PascalCase, and non-component as camelCase. However, it promotes inconsistency and could probably give confusion to the developers. Plus, it is prone to have conflicts with case-sensitive file systems like CI, Version Control and Operating Systems. By using kebab-case, we can avoid those problems. See [feature file structure](#-feature-file-structure) for reference.
+A common convention in React is to name components in `PascalCase` and non-components in `camelCase`. However, this can lead to inconsistency and potentially confuse developers. Moreover, it is susceptible to conflicts with case-sensitive file systems, such as Continuous Integration, Version Control, and Operating Systems. Using kebab-case helps avoid these issues. See [feature file structure](#-feature-file-structure) for reference.
 
-### ✏️ Rule #9: Use relative import when importing from the same module
+### ✏️ Rule #10: Use relative import when importing from the same module
 
 By having feature-based directory and barrel files, this type of architecture is prone to having circular dependency by importing a module from the same module. For example we have this directory setup:
 
@@ -255,7 +298,7 @@ By having feature-based directory and barrel files, this type of architecture is
             └── 📄 types.ts
 ```
 
-Then, inside `todo-list` if you want to import `add-todo-form`, you shouldn't import it using [path alias](#-typescript), use relative path instead.
+Inside the `todo-list`, if you intend to import the `add-todo-form`, it's advisable to refrain from using a path alias and opt for a relative path instead.
 
 ```ts
 // Alias path
@@ -271,7 +314,7 @@ import { AddTodoForm } from '../add-todo-form'
 
 ### 💡 Notes
 
-Although this project have certain rules to achieve the goal of **Screaming Architecture**, there can still be a lot of different implementations of it. It will only be a matter of preference and what will work for you or everyone in the team. There's no right or wrong here as long as you apply the important rule of **Screaming Architecture**, which is to tell the readers and developers about the system, not about the frameworks you used in your system.
+Although this project have certain rules to achieve the goal of **Screaming Architecture**, there can still be a lot of different implementations of it. It will only be a matter of preference and what will work for you or everyone in the team. There's no right or wrong here as long as you apply the important rule of **Screaming Architecture**, which is to tell the readers and developers about the system, not about the frameworks you used in your app.
 
 ## 📂 Feature File Structure
 
@@ -351,19 +394,118 @@ Although this project have certain rules to achieve the goal of **Screaming Arch
     └── 📄 index.ts
 ```
 
-## Code Generator
+## 🔄 Code Generator
+
+One of the core features of this project is code generation, providing built-in templates for the [structures outlined here](#-feature-file-structure). Maintaining code consistency in a codebase can be challenging, especially when working with a team of junior, mid, and senior developers. This feature aims to establish code consistency in your codebase and will save you a lot of time by avoiding the need to set up boilerplates every time.
+
+### 💡 Base Path
+
+The base path of every generated code is `src/features`, so when you input `todos` in `File path` prompt, the generated code will be placed in `src/features/todos`.
+
+### ⭐ Generate Component
+
+Generate component by running this command:
 
 ```
-pnpm plop
+pnpm plop component
 ```
 
-<img src="https://example.com/path/to/your-gif.gif" alt="Your GIF">
+These list of prompts will show after running that command
+
+| Prompt            | Description                                                    | Default Value |
+| :---------------- | :------------------------------------------------------------- | :-----------: |
+| `Name`            | Input the name of the component you want to generate           |               |
+| `File path`       | Input the file path for where you want place the component     |               |
+| `Element tag`     | Input the html element wrapper of your component               |     `div`     |
+| `Is it reusable?` | Select `yes` if you want the component to be setup as reusable |     `no`      |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component_lhqllc.png" alt="generate-component-demo">
+
+### ⭐ Generate Context-Reducer
+
+Generate component by running this command:
+
+```
+pnpm plop context-reducer
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                                | Default Value |
+| :---------- | :--------------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate.<br/> Name will have `-provider` suffix automatically |               |
+| `File path` | Input the file path for where you want place the component                                                 |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context-reducer_cbby2f.png" alt="generate-context-reducer-demo">
+
+### ⭐ Generate Context
+
+Generate component by running this command:
+
+```
+pnpm plop context
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                                 | Default Value |
+| :---------- | :---------------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate. <br/> Name will have `-provider` suffix automatically |               |
+| `File path` | Input the file path for where you want place the component                                                  |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context_ldc23z.png" alt="generate-context-demo">
+
+### ⭐ Generate Custom-Hook
+
+Generate component by running this command:
+
+```
+pnpm plop custom-hook
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                           | Default Value |
+| :---------- | :---------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate.<br/> Name will have `use-` prefix automatically |               |
+| `File path` | Input the file path for where you want place the component                                            |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/custom-hook_qopi8i.png" alt="generate-custom-hook-demo">
+
+### ⭐ Generate Utils
+
+Generate component by running this command:
+
+```
+pnpm plop utils
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                | Default Value |
+| :---------- | :--------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate       |               |
+| `File path` | Input the file path for where you want place the component |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/utils_ppbedq.png" alt="generate-utils-demo">
+
+### 💡 Shorthand Command
+
+Once you have memorized the sequence of prompts for each template, you can skip the prompts and run a shorthand command. For the [component template](#-generate-component), you can skip the prompts by running this shorthand command.
+
+```
+pnpm plop component todo sample-feature div no
+```
+
+That command will generate a `non-reusable` component named `todo-item` with `div` element as its wrapper and placed inside `src/features/todos` directory
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component-shorthand_frpqcu.png" alt="generate-component-shorthand-demo">
 
 ## ⚙️ Project Configurations & Setup
 
 ### 🔧 Package Manager
 
-This project uses `pnpm` as package manager. `pnpm` is known to be 3 times faster and more efficient than `npm` and it is also faster than `yarn` in many cases. There are still more reasons to be choosing `pnpm` over `npm` and `yarn`, but it is still a matter of team's preference. Listed down below some useful resources about `pnpm`:
+This project uses `pnpm` as package manager. `pnpm` is known to be 3 times faster and more efficient than `npm` and it is also faster than `yarn` in many cases. There are still more reasons to be choosing `pnpm` over `npm` and `yarn`, but it is still a matter of team's preference. Listed down below some helpful resources about `pnpm`:
 
 - [Why you should prefer using pnpm over npm and yarn?](https://refine.dev/blog/pnpm-vs-npm-and-yarn/)
 - [JavaScript Package Managers: NPM vs YARN vs PNPM](https://www.atatus.com/blog/npm-vs-yarn-vs-pnpm/)
@@ -375,7 +517,7 @@ This project runs an automated error-checks workflow, including linting, type ch
 
 ### 🔧 Husky Pre-Commit
 
-In order to protect the repo from bad commits, this project is configured with husky pre-commit that will run eslint and typecheck and will prevent the commit if there's any eslint and type errors.
+To protect the repository from bad commits, this project is configured with Husky pre-commit, which runs lint and type checks. It prevents a commit if there are any lint or type errors.
 
 ### 🔧 TypeScript
 
@@ -423,7 +565,7 @@ This project is configured to use the following testing frameworks:
   - Jest + React Testing Library
 
 - **End-to-end Testing**
-  - Cypress (Coming Soon)
+  - Cypress
 
 ### 🔧 SCSS Modules
 
@@ -436,7 +578,7 @@ This project uses SCSS modules for styling.
 - **styles/base**
   - This is where the global styles are placed like reset and base styles. This set of styles are imported in the root app.
 
-## Resources About Screaming Architecture
+## 📚 Resources About Screaming Architecture
 
 - https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html
 
