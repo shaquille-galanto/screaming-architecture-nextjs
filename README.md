@@ -16,6 +16,7 @@ This project is a highly scalable architecture for NextJS 13, built and configur
   - [Create separate directory for section components](#%EF%B8%8F-rule-8-create-separate-directory-for-section-components)
   - [Use kebab-case for file/folder names](#%EF%B8%8F-rule-9-use-kebab-case-for-filefolder-names)
   - [Use relative import when importing from the same module](#%EF%B8%8F-rule-10-use-relative-import-when-importing-from-the-same-module)
+  - [Reference](#-reference)
   - [Notes](#-notes)
 - [Feature File Structure](#-feature-file-structure)
   - [Component](#-component)
@@ -311,6 +312,10 @@ import { AddTodoForm } from '@features/todos'
 // ✅ Do this instead ✅
 import { AddTodoForm } from '../add-todo-form'
 ```
+
+### 📖 Reference
+
+This project includes a simple todo app implementation that follows the mentioned rules above, acting as a handy reference and guide on rule compliance. Furthermore, the codes in this todo app, along with the test suites, adheres to best practices and widely-used React patterns. This can be particularly helpful as a learning resource for less experienced developers on the team.
 
 ### 💡 Notes
 
