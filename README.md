@@ -58,7 +58,7 @@ This project is a highly scalable architecture for NextJS 13, built and configur
 
 1. **Forking the Project**
 
-   - For users who want to collaborate and contribute to this project, forking this repository is the.
+   - For users who want to collaborate and contribute to this project, forking this repository is the way to go.
 
 2. **Download the Files**
 
@@ -107,7 +107,7 @@ These list of prompts will show after running that command
 
 ### ⭐ Generate Context-Reducer
 
-Generate component by running this command:
+Generate context-reducer by running this command:
 
 ```
 pnpm plop context-reducer
@@ -124,7 +124,7 @@ These list of prompts will show after running that command
 
 ### ⭐ Generate Context
 
-Generate component by running this command:
+Generate context by running this command:
 
 ```
 pnpm plop context
@@ -141,7 +141,7 @@ These list of prompts will show after running that command
 
 ### ⭐ Generate Custom-Hook
 
-Generate component by running this command:
+Generate custom-hook by running this command:
 
 ```
 pnpm plop custom-hook
@@ -158,7 +158,7 @@ These list of prompts will show after running that command
 
 ### ⭐ Generate Utils
 
-Generate component by running this command:
+Generate utility functions by running this command:
 
 ```
 pnpm plop utils
