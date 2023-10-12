@@ -4,8 +4,19 @@ This project is a highly scalable architecture for NextJS 13, built and configur
 
 ### 📜 Table of Contents
 
-- [ Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
-- [Rules](#-rules)
+- [Introduction to Screaming Architecture](#-introduction-to-screaming-architecture)
+- [Getting Started](#-getting-started)
+  - [Three ways to use this project](#-three-ways-to-use-this-project)
+  - [Run the App](#-run-the-app)
+- [Code Generator](#-code-generator)
+  - [Base Path](#-base-path)
+  - [Generate Component](#-generate-component)
+  - [Generate Context-Reducer](#-generate-context-reducer)
+  - [Generate Context](#-generate-context)
+  - [Generate Custom-Hook](#-generate-custom-hook)
+  - [Generate Utils](#-generate-utils)
+  - [Shorthand Command](#-shorthand-command)
+- [Project Architecture Rules](#-project-architecture-rules)
   - [Group by feature](#%EF%B8%8F-rule-1-group-by-feature)
   - [Create a separate file for each module](#%EF%B8%8F-rule-2-create-a-separate-file-for-each-module)
   - [Avoid nesting of feature files inside feature file](#%EF%B8%8F-rule-3-avoid-nesting-of-feature-files-inside-feature-file)
@@ -25,14 +36,6 @@ This project is a highly scalable architecture for NextJS 13, built and configur
   - [Context](#-context)
   - [Hooks](#-hooks)
   - [Utils](#-utils)
-- [Code Generator](#-code-generator)
-  - [Base Path](#-base-path)
-  - [Generate Component](#-generate-component)
-  - [Generate Context-Reducer](#-generate-context-reducer)
-  - [Generate Context](#-generate-context)
-  - [Generate Custom-Hook](#-generate-custom-hook)
-  - [Generate Utils](#-generate-utils)
-  - [Shorthand Command](#-shorthand-command)
 - [Project Configurations & Setup](#%EF%B8%8F-project-configurations--setup)
   - [Package Manager](#-package-manager)
   - [Continuous Integration (CI)](#-continuous-integration-ci)
@@ -49,7 +52,140 @@ This project is a highly scalable architecture for NextJS 13, built and configur
 
 **Screaming Architecture** is a concept introduced by Uncle Bob (Robert C. Martin) as a metaphor for software architecture that emphasizes the clarity and intent of the system's architecture through its structure and organization. The idea behind Screaming Architecture is to make the architecture of a software system so evident and expressive that it "screams" its purpose and design, making it easy for developers and stakeholders to understand and work with.
 
-## 📝 Rules
+## 🚀 Getting Started
+
+### 💡 Three ways to use this project
+
+1. **Forking the Project**
+
+   - For users who want to collaborate and contribute to this project, forking this repository is the.
+
+2. **Download the Files**
+
+   - For users who simply want to integrate the project into their next project, downloading the project files is the straightforward approach.
+
+3. **Referencing for Project Structure**
+   - Maybe you already have an existing project, or perhaps the tech stack you're using is different. In such cases, you can use this project as a valuable reference for structuring your own. Extract insights, learnings, or even download essential files like code templates to enhance your project structure.
+
+### ✨ Run the App
+
+If you decided to either fork or do the same setup by downloading the files, you can get started by running the following command:
+
+```
+pnpm install
+pnpm dev
+```
+
+This will install the necessary dependencies and launch the app in development mode.
+
+## 🔄 Code Generator
+
+One of the core features of this project is code generation, providing built-in templates for the [structures outlined here](#-feature-file-structure). Maintaining code consistency in a codebase can be challenging, especially when working with a team of junior, mid, and senior developers. This feature aims to establish code consistency in your codebase and will save you a lot of time by avoiding the need to set up boilerplates every time.
+
+### 💡 Base Path
+
+The base path of every generated code is `src/features`, so when you input `todos` in `File path` prompt, the generated code will be placed in `src/features/todos`.
+
+### ⭐ Generate Component
+
+Generate component by running this command:
+
+```
+pnpm plop component
+```
+
+These list of prompts will show after running that command
+
+| Prompt            | Description                                                    | Default Value |
+| :---------------- | :------------------------------------------------------------- | :-----------: |
+| `Name`            | Input the name of the component you want to generate           |               |
+| `File path`       | Input the file path for where you want place the component     |               |
+| `Element tag`     | Input the html element wrapper of your component               |     `div`     |
+| `Is it reusable?` | Select `yes` if you want the component to be setup as reusable |     `no`      |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component_lhqllc.png" alt="generate-component-demo">
+
+### ⭐ Generate Context-Reducer
+
+Generate component by running this command:
+
+```
+pnpm plop context-reducer
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                                | Default Value |
+| :---------- | :--------------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate.<br/> Name will have `-provider` suffix automatically |               |
+| `File path` | Input the file path for where you want place the component                                                 |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context-reducer_cbby2f.png" alt="generate-context-reducer-demo">
+
+### ⭐ Generate Context
+
+Generate component by running this command:
+
+```
+pnpm plop context
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                                 | Default Value |
+| :---------- | :---------------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate. <br/> Name will have `-provider` suffix automatically |               |
+| `File path` | Input the file path for where you want place the component                                                  |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context_ldc23z.png" alt="generate-context-demo">
+
+### ⭐ Generate Custom-Hook
+
+Generate component by running this command:
+
+```
+pnpm plop custom-hook
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                                                           | Default Value |
+| :---------- | :---------------------------------------------------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate.<br/> Name will have `use-` prefix automatically |               |
+| `File path` | Input the file path for where you want place the component                                            |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/custom-hook_qopi8i.png" alt="generate-custom-hook-demo">
+
+### ⭐ Generate Utils
+
+Generate component by running this command:
+
+```
+pnpm plop utils
+```
+
+These list of prompts will show after running that command
+
+| Prompt      | Description                                                | Default Value |
+| :---------- | :--------------------------------------------------------- | :-----------: |
+| `Name`      | Input the name of the component you want to generate       |               |
+| `File path` | Input the file path for where you want place the component |               |
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/utils_ppbedq.png" alt="generate-utils-demo">
+
+### 💡 Shorthand Command
+
+Once you have memorized the sequence of prompts for each template, you can skip the prompts and run a shorthand command. For the [component template](#-generate-component), you can skip the prompts by running this shorthand command.
+
+```
+pnpm plop component todo sample-feature div no
+```
+
+That command will generate a `non-reusable` component named `todo-item` with `div` element as its wrapper and placed inside `src/features/todos` directory
+
+<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component-shorthand_frpqcu.png" alt="generate-component-shorthand-demo">
+
+## 📝 Project Architecture Rules
 
 ### ✏️ Rule #1: Group by feature
 
@@ -398,113 +534,6 @@ Although this project have certain rules to achieve the goal of **Screaming Arch
     │   └── 📄 use-media-query.ts
     └── 📄 index.ts
 ```
-
-## 🔄 Code Generator
-
-One of the core features of this project is code generation, providing built-in templates for the [structures outlined here](#-feature-file-structure). Maintaining code consistency in a codebase can be challenging, especially when working with a team of junior, mid, and senior developers. This feature aims to establish code consistency in your codebase and will save you a lot of time by avoiding the need to set up boilerplates every time.
-
-### 💡 Base Path
-
-The base path of every generated code is `src/features`, so when you input `todos` in `File path` prompt, the generated code will be placed in `src/features/todos`.
-
-### ⭐ Generate Component
-
-Generate component by running this command:
-
-```
-pnpm plop component
-```
-
-These list of prompts will show after running that command
-
-| Prompt            | Description                                                    | Default Value |
-| :---------------- | :------------------------------------------------------------- | :-----------: |
-| `Name`            | Input the name of the component you want to generate           |               |
-| `File path`       | Input the file path for where you want place the component     |               |
-| `Element tag`     | Input the html element wrapper of your component               |     `div`     |
-| `Is it reusable?` | Select `yes` if you want the component to be setup as reusable |     `no`      |
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component_lhqllc.png" alt="generate-component-demo">
-
-### ⭐ Generate Context-Reducer
-
-Generate component by running this command:
-
-```
-pnpm plop context-reducer
-```
-
-These list of prompts will show after running that command
-
-| Prompt      | Description                                                                                                | Default Value |
-| :---------- | :--------------------------------------------------------------------------------------------------------- | :-----------: |
-| `Name`      | Input the name of the component you want to generate.<br/> Name will have `-provider` suffix automatically |               |
-| `File path` | Input the file path for where you want place the component                                                 |               |
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context-reducer_cbby2f.png" alt="generate-context-reducer-demo">
-
-### ⭐ Generate Context
-
-Generate component by running this command:
-
-```
-pnpm plop context
-```
-
-These list of prompts will show after running that command
-
-| Prompt      | Description                                                                                                 | Default Value |
-| :---------- | :---------------------------------------------------------------------------------------------------------- | :-----------: |
-| `Name`      | Input the name of the component you want to generate. <br/> Name will have `-provider` suffix automatically |               |
-| `File path` | Input the file path for where you want place the component                                                  |               |
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/context_ldc23z.png" alt="generate-context-demo">
-
-### ⭐ Generate Custom-Hook
-
-Generate component by running this command:
-
-```
-pnpm plop custom-hook
-```
-
-These list of prompts will show after running that command
-
-| Prompt      | Description                                                                                           | Default Value |
-| :---------- | :---------------------------------------------------------------------------------------------------- | :-----------: |
-| `Name`      | Input the name of the component you want to generate.<br/> Name will have `use-` prefix automatically |               |
-| `File path` | Input the file path for where you want place the component                                            |               |
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/custom-hook_qopi8i.png" alt="generate-custom-hook-demo">
-
-### ⭐ Generate Utils
-
-Generate component by running this command:
-
-```
-pnpm plop utils
-```
-
-These list of prompts will show after running that command
-
-| Prompt      | Description                                                | Default Value |
-| :---------- | :--------------------------------------------------------- | :-----------: |
-| `Name`      | Input the name of the component you want to generate       |               |
-| `File path` | Input the file path for where you want place the component |               |
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/utils_ppbedq.png" alt="generate-utils-demo">
-
-### 💡 Shorthand Command
-
-Once you have memorized the sequence of prompts for each template, you can skip the prompts and run a shorthand command. For the [component template](#-generate-component), you can skip the prompts by running this shorthand command.
-
-```
-pnpm plop component todo sample-feature div no
-```
-
-That command will generate a `non-reusable` component named `todo-item` with `div` element as its wrapper and placed inside `src/features/todos` directory
-
-<img src="https://res.cloudinary.com/shaq18/image/upload/v1696951737/component-shorthand_frpqcu.png" alt="generate-component-shorthand-demo">
 
 ## ⚙️ Project Configurations & Setup
 
