@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "cypress:open": "cypress open",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "plop": "plop"
   },
   "dependencies": {
     "@types/node": "20.5.6",
